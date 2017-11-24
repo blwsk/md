@@ -1,3 +1,5 @@
+import { Object } from 'core-js/library/web/timers'
+
 const ROUTES = ['editor', 'post']
 const POSTS = {
   ['post-one']: {
@@ -13,9 +15,19 @@ const POSTS = {
     timestamp: Date.now(),
   },
 }
+const NEW_POST = {
+  id: '',
+  title: '',
+  text: '',
+  timestamp: Date.now(),
+}
 
-function getPostId(pathname) {
-  const params = pathname.split('/')
+function getNewPost(id) {
+  return Object.assign({}, NEW_POST, { id })
+}
+
+function getPostId(url) {
+  const params = url.split('/')
 
   const withoutRouteComponents = params.filter(param => !!param)
 
@@ -31,15 +43,21 @@ function getPost(id) {
   })
 }
 
-async function buildPostProps({ pathname }) {
-  const id = getPostId(pathname)
+async function getPostProps({ url }) {
+  const id = getPostId(url)
   const post = await getPost(id)
-  console.log(post)
+
+  return { post }
+}
+
+async function getEditorProps({ url }) {
+  const id = getPostId(url)
+  const post = (await getPost(id)) || getNewPost(id)
 
   return { post }
 }
 
 module.exports = {
-  buildPostProps: buildPostProps,
-  buildEditorProps: buildPostProps,
+  getPostProps,
+  getEditorProps,
 }

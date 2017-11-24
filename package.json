@@ -22,15 +22,11 @@
     "reason-react": "^0.3.0"
   },
   "babel": {
-    "presets": [
-      "next/babel"
-    ],
-    "plugins": [
-      "babel-plugin-bucklescript"
-    ]
+    "presets": ["next/babel"],
+    "plugins": ["babel-plugin-bucklescript"]
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 80,
     "tabWidth": 2,
     "semi": false,
     "singleQuote": true,

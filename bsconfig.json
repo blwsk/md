@@ -5,7 +5,7 @@
 {
   "name": "md",
   "reason": { "react-jsx": 2 },
-  "sources": ["components"],
+  "sources": ["components", "components/types"],
   "package-specs": [
     {
       "module": "commonjs",

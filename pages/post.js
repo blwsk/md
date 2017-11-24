@@ -1,7 +1,16 @@
+import React from 'react'
 import Post from '../components/Post.js'
+import { getPostProps } from '../server/data.js'
 
-export default props => {
-  const post = props.url.query.post
-  console.log(props)
-  return post ? <Post post={post} /> : <Post />
+class PostPage extends React.Component {
+  static async getInitialProps({ req }) {
+    if (!req) return
+    return getPostProps(req)
+  }
+
+  render() {
+    return <Post post={this.props.post} />
+  }
 }
+
+export default PostPage

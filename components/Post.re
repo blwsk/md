@@ -3,12 +3,12 @@ let component = ReasonReact.statelessComponent("Post");
 let make = (~post=?, _children) => {
   ...component,
   render: (_self) => {
-    let source =
+    let content =
       switch post {
-      | Some(post) => post##text
-      | None => "# 404"
+      | Some(post) => <Article post />
+      | None => <NotFound />
       };
-    <div> <Markdown source /> </div>
+    content
   }
 };
 
