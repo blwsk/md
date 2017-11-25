@@ -22,7 +22,7 @@ let make = (~post: PostRecord.post, ~savePost, _children) => {
   render: (self) => {
     let {preview, stagedPost} = self.state;
     let updatePost = (text) => {
-      let updatedPost = Js.Obj.assign(stagedPost, {"text": text});
+      let updatedPost = PostRecord.setText(text, stagedPost);
       self.reduce((_e) => UpdatePost(updatedPost), ())
     };
     <div>
