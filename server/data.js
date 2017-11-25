@@ -6,20 +6,20 @@ const POSTS = {
     id: 'post-one',
     title: 'Post one',
     text: '# Post one\nHere is some text',
-    timestamp: Date.now(),
+    createdAt: Date.now(),
   },
   ['post-two']: {
     id: 'post-two',
     title: 'Post two',
     text: '# Post two\nHere is some more text',
-    timestamp: Date.now(),
+    createdAt: Date.now(),
   },
 }
 const NEW_POST = {
   id: '',
   title: '',
   text: '',
-  timestamp: Date.now(),
+  createdAt: Date.now(),
 }
 
 function getNewPost(id) {
@@ -57,7 +57,12 @@ async function getEditorProps({ url }) {
   return { post }
 }
 
+function savePost(post) {
+  return new Promise(resolve => resolve(post))
+}
+
 module.exports = {
   getPostProps,
   getEditorProps,
+  savePost,
 }

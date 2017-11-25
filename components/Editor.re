@@ -10,7 +10,7 @@ type state = {
 
 let component = ReasonReact.reducerComponent("Editor");
 
-let make = (~post: PostRecord.post, _children) => {
+let make = (~post: PostRecord.post, ~savePost, _children) => {
   ...component,
   initialState: () => {preview: false, stagedPost: post},
   reducer: (action, state) =>
@@ -21,13 +21,8 @@ let make = (~post: PostRecord.post, _children) => {
     },
   render: (self) => {
     let {preview, stagedPost} = self.state;
-    let updatePost = (updatedText) => {
-      let updatedPost = {
-        "text": updatedText,
-        "id": stagedPost##id,
-        "title": stagedPost##title,
-        "timestamp": stagedPost##timestamp
-      };
+    let updatePost = (text) => {
+      let updatedPost = Js.Obj.assign(stagedPost, {"text": text});
       self.reduce((_e) => UpdatePost(updatedPost), ())
     };
     <div>
@@ -37,6 +32,9 @@ let make = (~post: PostRecord.post, _children) => {
         </button>
         <button onClick=(self.reduce((_e) => Preview))>
           (ReasonReact.stringToElement("Preview"))
+        </button>
+        <button onClick=((_e) => savePost(stagedPost))>
+          (ReasonReact.stringToElement("Save"))
         </button>
       </div>
       (preview ? <Article post=stagedPost /> : <PostEditor post=stagedPost updatePost />)
@@ -49,6 +47,7 @@ let default =
     ~component,
     (props) => {
       let post = props##post;
-      make(~post, [||])
+      let savePost = props##savePost;
+      make(~post, ~savePost, [||])
     }
   );

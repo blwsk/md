@@ -1,5 +1,5 @@
 import React from 'react'
-import Post from '../components/Post.js'
+import Post from '../lib/js/components/Post.js'
 import { getPostProps } from '../server/data.js'
 
 class PostPage extends React.Component {

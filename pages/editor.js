@@ -1,6 +1,6 @@
 import React from 'react'
-import Editor from '../components/Editor.js'
-import { getEditorProps } from '../server/data.js'
+import Editor from '../lib/js/components/Editor.js'
+import { getEditorProps, savePost } from '../server/data.js'
 
 class EditorPage extends React.Component {
   static async getInitialProps({ req }) {
@@ -9,7 +9,7 @@ class EditorPage extends React.Component {
   }
 
   render() {
-    return <Editor post={this.props.post} />
+    return <Editor post={this.props.post} savePost={savePost} />
   }
 }
 
