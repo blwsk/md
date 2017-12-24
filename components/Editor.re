@@ -20,9 +20,9 @@ let make = (~post: PostRecord.post, ~savePost, _children) => {
     | UpdatePost(updatedPost) => ReasonReact.Update({...state, stagedPost: updatedPost})
     },
   render: (self) => {
-    let {preview, stagedPost} = self.state;
+    let {preview, stagedPost: post} = self.state;
     let updatePost = (text) => {
-      let updatedPost = PostRecord.setText(text, stagedPost);
+      let updatedPost = PostRecord.setText(text, post);
       self.reduce((_e) => UpdatePost(updatedPost), ())
     };
     <div>
@@ -33,11 +33,9 @@ let make = (~post: PostRecord.post, ~savePost, _children) => {
         <button onClick=(self.reduce((_e) => Preview))>
           (ReasonReact.stringToElement("Preview"))
         </button>
-        <button onClick=((_e) => savePost(stagedPost))>
-          (ReasonReact.stringToElement("Save"))
-        </button>
+        <button onClick=((_e) => savePost(post))> (ReasonReact.stringToElement("Save")) </button>
       </div>
-      (preview ? <Article post=stagedPost /> : <PostEditor post=stagedPost updatePost />)
+      (preview ? <Article post /> : <PostEditor post updatePost />)
     </div>
   }
 };
