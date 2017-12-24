@@ -2,9 +2,9 @@ open Styles;
 
 let component = ReasonReact.statelessComponent("PostEditor");
 
-let divStyles = combineStyles([Display("flex"), Width("100%")]);
+let divStyles = css([Display(Flex), Width("100%")]);
 
-let textareaStyles = combineStyles([Display("flex"), Width("700px")]);
+let textareaStyles = css([Display(Flex), Width("700px")]);
 
 let make = (~post: PostRecord.post, ~updatePost, _children) => {
   let onChange = (event) => {
