@@ -10,6 +10,10 @@ type state = {
 
 let component = ReasonReact.reducerComponent("Editor");
 
+let style = Styles.css([Display(FlexColumn), Width("100%"), Height("100%")]);
+
+let controlStyle = Styles.css([Position(Fixed)]);
+
 let make = (~post: PostRecord.post, ~savePost, _children) => {
   ...component,
   initialState: () => {preview: false, stagedPost: post},
@@ -25,8 +29,8 @@ let make = (~post: PostRecord.post, ~savePost, _children) => {
       let updatedPost = PostRecord.setText(text, post);
       self.reduce((_e) => UpdatePost(updatedPost), ())
     };
-    <div>
-      <div>
+    <div style>
+      <div style=controlStyle>
         <button onClick=(self.reduce((_e) => Edit))>
           (ReasonReact.stringToElement("Edit"))
         </button>

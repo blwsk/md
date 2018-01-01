@@ -1,6 +1,10 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
 
+const BLACK = 'BLACK'
+const WHITE = 'WHITE'
+const MAGENTA = 'MAGENTA'
+
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     const { html, head, errorHtml, chunks } = renderPage()
@@ -15,32 +19,51 @@ export default class MyDocument extends Document {
           <style>{`
             * {
               font-family: -apple-system,system-ui,BlinkMacSystemFont,sans-serif;
+              margin: 0;
+              padding: 0;
+              outline: none;
+              border: none;
+              box-sizing: border-box;
             }
 
-            textarea, input {
+            div[data-reactroot] {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              height: 100%;
+            }
+
+            ::selection {
+              background-color: ${MAGENTA};
+            }
+
+            textarea, input, button {
               padding: 12px;
             }
-
+            
             textarea {
+              width: inherit;
+              height: inherit;
+              background: ${BLACK};
+              color: ${WHITE};
               font-size: 24px;
-              font-family: monospace;
+              caret-color: ${MAGENTA};
             }
 
-            textarea:focus,textarea:active {
-              background: black;
-              border: none;
-              outline: none;
-              color: white;
+            button {
+              background: ${MAGENTA};
+              color: ${WHITE};
+              text-transform: uppercase;
+              cursor: pointer;
             }
-
-            textarea.saved {
-              background: green;
-              color: white;
+            button:hover {
+              opacity: 0.9;
             }
           `}</style>
         </Head>
-        <body className="custom_class">
-          {this.props.customValue}
+        <body>
           <Main />
           <NextScript />
         </body>
