@@ -35,5 +35,8 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@glennsl/bs-jest": "^0.3.2"
   }
 }

@@ -8,7 +8,7 @@ let make = (~post=?, _children) => {
       | Some(post) => <Article post />
       | None => <NotFound />
       };
-    content
+    <div style=Styles.p_80_20> content </div>
   }
 };
 

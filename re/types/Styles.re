@@ -46,3 +46,5 @@ let css = (s) => {
   let parsed = List.map(parseStyleType, s);
   List.fold_left(Style.combine, Style.make(), parsed)
 };
+
+let p_80_20 = css([Padding("80px 20px")]);

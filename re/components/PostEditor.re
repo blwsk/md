@@ -2,7 +2,7 @@ let component = ReasonReact.statelessComponent("PostEditor");
 
 let style = Styles.css([Width("100%"), Height("100%")]);
 
-let textareaStyle = Styles.css([Padding("80px 20px")]);
+let textareaStyle = Styles.css([Padding("80px")]);
 
 let make = (~post: PostRecord.post, ~updatePost, _children) => {
   let onChange = (event) => {
@@ -12,6 +12,8 @@ let make = (~post: PostRecord.post, ~updatePost, _children) => {
   {
     ...component,
     render: (_self) =>
-      <div style> <textarea style=textareaStyle value=post##text onChange /> </div>
+      <div className="editor" style>
+        <textarea style=textareaStyle value=post##text onChange />
+      </div>
   }
 };

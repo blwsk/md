@@ -1,5 +1,5 @@
 import React from 'react'
-import Editor from '../lib/js/components/Editor.js'
+import Editor from '../lib/js/re/components/Editor.js'
 import { getEditorProps, savePost } from '../server/data.js'
 
 class EditorPage extends React.Component {

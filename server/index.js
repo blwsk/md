@@ -34,6 +34,7 @@ async function serve(req, res) {
 function listen(err) {
   if (err) throw err
 
+  console.log(process.env.BLAH)
   console.log(`> Ready on http://localhost:${PORT}`)
 }
 

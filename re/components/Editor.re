@@ -24,20 +24,29 @@ let make = (~post: PostRecord.post, ~savePost, _children) => {
     | UpdatePost(updatedPost) => ReasonReact.Update({...state, stagedPost: updatedPost})
     },
   render: (self) => {
-    let {preview, stagedPost: post} = self.state;
+    let {preview, stagedPost} = self.state;
     let updatePost = (text) => {
-      let updatedPost = PostRecord.setText(text, post);
+      let updatedPost = PostRecord.setText(text, stagedPost);
       self.reduce((_e) => UpdatePost(updatedPost), ())
     };
+    let togglePublishPost = () => {
+      let updatedPublished = ! Js.to_bool(stagedPost##published);
+      let updatedPost = PostRecord.setPublished(updatedPublished ? Js.true_ : Js.false_, post);
+      self.reduce((_e) => UpdatePost(updatedPost), ())
+    };
+    let blah = Js.to_bool(stagedPost##published) ? "Published" : "Unpublished";
     <div style>
       <div style=controlStyle>
-        <button onClick=(self.reduce((_e) => Edit))>
+        <button className=(preview ? "" : "disabled") onClick=(self.reduce((_e) => Edit))>
           (ReasonReact.stringToElement("Edit"))
         </button>
-        <button onClick=(self.reduce((_e) => Preview))>
+        <button className=(preview ? "disabled" : "") onClick=(self.reduce((_e) => Preview))>
           (ReasonReact.stringToElement("Preview"))
         </button>
         <button onClick=((_e) => savePost(post))> (ReasonReact.stringToElement("Save")) </button>
+        <button onClick=((_e) => togglePublishPost())>
+          (ReasonReact.stringToElement(blah))
+        </button>
       </div>
       (preview ? <Article post /> : <PostEditor post updatePost />)
     </div>
