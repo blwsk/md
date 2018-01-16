@@ -5,7 +5,7 @@
 {
   "name": "md",
   "reason": { "react-jsx": 2 },
-  "sources": ["re", "re/components", "re/types", "re/tests"],
+  "sources": ["re", "re/components", "re/types", "re/__tests__"],
   "package-specs": [
     {
       "module": "commonjs",
@@ -14,7 +14,7 @@
   ],
   "suffix": ".js",
   "namespace": true,
-  "bs-dependencies": ["reason-react"],
+  "bs-dependencies": ["reason-react", "@glennsl/bs-jest"],
   "bs-dev-dependencies": ["@glennsl/bs-jest"],
   "refmt": 3,
   "bsc-flags": ["-bs-super-errors"]

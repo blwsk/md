@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BLAH="kev"
+PORT="3000"
 
-BLAH=$BLAH \
+PORT=$PORT \
 	yarn dev

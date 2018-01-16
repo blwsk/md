@@ -1,6 +1,6 @@
-import { Object } from 'core-js/library/web/timers'
+import { Object } from 'core-js/library/web/timers';
 
-const ROUTES = ['editor', 'post']
+const ROUTES = ['editor', 'post'];
 const POSTS = {
   ['post-one']: {
     id: 'post-one',
@@ -41,56 +41,56 @@ When a company wants to replace an existing system (in this case, an organizatio
     createdAt: Date.now(),
     published: false,
   },
-}
+};
 const NEW_POST = {
   id: '',
   title: '',
   text: '',
   createdAt: Date.now(),
   published: false,
-}
+};
 
 function getNewPost(id) {
-  return Object.assign({}, NEW_POST, { id })
+  return Object.assign({}, NEW_POST, { id });
 }
 
 function getPostId(url) {
-  const params = url.split('/')
+  const params = url.split('/');
 
-  const withoutRouteComponents = params.filter(Boolean)
+  const withoutRouteComponents = params.filter(Boolean);
 
   return withoutRouteComponents.length > 0
     ? withoutRouteComponents[withoutRouteComponents.length - 1]
-    : undefined
+    : undefined;
 }
 
 function getPost(id) {
   return new Promise(resolve => {
-    const post = POSTS[id]
-    resolve(post)
-  })
+    const post = POSTS[id];
+    resolve(post);
+  });
 }
 
 async function getPostProps({ url }) {
-  const id = getPostId(url)
-  const post = await getPost(id)
+  const id = getPostId(url);
+  const post = await getPost(id);
 
-  return { post }
+  return { post };
 }
 
 async function getEditorProps({ url }) {
-  const id = getPostId(url)
-  const post = (await getPost(id)) || getNewPost(id)
+  const id = getPostId(url);
+  const post = (await getPost(id)) || getNewPost(id);
 
-  return { post }
+  return { post };
 }
 
 function savePost(post) {
-  return new Promise(resolve => resolve(post))
+  return new Promise(resolve => resolve(post));
 }
 
 module.exports = {
   getPostProps,
   getEditorProps,
   savePost,
-}
+};

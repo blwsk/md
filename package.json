@@ -4,17 +4,20 @@
   "scripts": {
     "buckle:dev": "bsb -make-world -w",
     "next:dev": "node ./server/index.js",
+    "test": "jest --watch",
     "dev": "concurrently \"npm run buckle:dev\" \"npm run next:dev\"",
     "build": "next build",
     "start": "next start -w"
   },
   "license": "MIT",
   "dependencies": {
+    "@hs/transmute": "^2.0.4",
     "babel-plugin-bucklescript": "^0.2.3-1",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-wrap-in-js": "^1.1.1",
     "bs-platform": "^2.1.0",
     "concurrently": "^3.5.0",
+    "immutable": "^3.8.2",
     "next": "^4.0.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
@@ -22,17 +25,13 @@
     "reason-react": "^0.3.0"
   },
   "babel": {
-    "presets": [
-      "next/babel"
-    ],
-    "plugins": [
-      "babel-plugin-bucklescript"
-    ]
+    "presets": ["next/babel"],
+    "plugins": ["babel-plugin-bucklescript"]
   },
   "prettier": {
     "printWidth": 80,
     "tabWidth": 2,
-    "semi": false,
+    "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
   },
